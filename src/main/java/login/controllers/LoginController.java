@@ -11,8 +11,7 @@ public class LoginController {
     public static ResponseEntity<String> execute(String name) {
         try {
             // try connecting to database
-            LoginFactory loginFactory = new LoginFactory();
-            LoginService service = loginFactory.getLoginService();
+            LoginService service = LoginFactory.builder().build().getLoginService();
             String response = service.execute(name);
 
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
