@@ -6,7 +6,7 @@ import lombok.Builder;
 
 @Builder
 public class LoginFactory {
-    private Connection conn; // database conn
+    private Connection conn;
 
     public LoginService getLoginService() {
         return new LoginService();
