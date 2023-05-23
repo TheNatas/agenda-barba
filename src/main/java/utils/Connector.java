@@ -1,7 +1,6 @@
 package utils;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import java.sql.Connection;
