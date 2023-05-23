@@ -9,7 +9,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Connector {
@@ -31,7 +30,7 @@ public class Connector {
             conn = DriverManager.getConnection(
                     "jdbc:" + this.dbms + "://" +
                             this.serverName +
-                            ":" + this.portNumber + "/",
+                            ":" + this.portNumber + "/" + this.dbName,
                     connectionProps);
         } else if (this.dbms.equals("derby")) {
             conn = DriverManager.getConnection(
@@ -40,7 +39,6 @@ public class Connector {
                             ";create=true",
                     connectionProps);
         }
-        System.out.println("Connected to database");
         return conn;
     }
 }

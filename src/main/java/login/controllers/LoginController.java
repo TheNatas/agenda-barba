@@ -8,13 +8,15 @@ import utils.Connector;
 
 import java.net.URI;
 import java.sql.Connection;
+import java.util.List;
 
 public class LoginController {
-    public static ResponseEntity<String> execute(String name) {
+    public static ResponseEntity<List<String>> execute(String name) {
         try {
-            Connection conn = Connector.builder().build().getConnection();
+            Connector connector = new Connector();
+            Connection conn = connector.getConnection();
             LoginService service = LoginFactory.builder().conn(conn).build().getLoginService();
-            String response = service.execute(name);
+            List<String> response = service.execute(name);
 
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                     .path("/{id}")
@@ -24,6 +26,7 @@ public class LoginController {
             return ResponseEntity.created(uri)
                     .body(response);
         } catch (Exception ex) {
+            ex.printStackTrace(System.err);
             return ResponseEntity.badRequest().build();
         }
     }
