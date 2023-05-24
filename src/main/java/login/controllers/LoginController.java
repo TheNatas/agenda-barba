@@ -4,6 +4,7 @@ import login.dtos.LoginDto;
 import login.entities.LoggedUserEntity;
 import login.factories.LoginFactory;
 import login.services.LoginService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import utils.Connector;
@@ -20,7 +21,7 @@ public class LoginController {
             LoggedUserEntity response = service.execute(loginDto);
 
             if (response == null) {
-                throw new Exception("User not found");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
             }
 
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
