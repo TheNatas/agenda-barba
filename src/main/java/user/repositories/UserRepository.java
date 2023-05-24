@@ -1,7 +1,8 @@
-package login.repositories;
+package user.repositories;
 
 import login.entities.LoggedUserEntity;
 import lombok.AllArgsConstructor;
+import user.models.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,16 +12,13 @@ import java.util.List;
 public class UserRepository {
     private Connection conn;
 
-    public List<String> getUsersNames() throws SQLException {
-        Statement statement = conn.createStatement();
-        statement.execute("select * from user");
-        ResultSet rs = statement.getResultSet();
-        List<String> names = new ArrayList<>();
-        while (rs.next()) {
-            names.add(rs.getString(4));
-        }
-
-        return names;
+    public int createUser(User user) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("insert into user (profile_id, active, email, password) values (?,?,?,?)");
+        ps.setInt(1, user.getProfileId());
+        ps.setBoolean(2, user.getActive());
+        ps.setString(3, user.getEmail());
+        ps.setString(4, user.getPassword());
+        return ps.execute() ? 1 : 0;
     }
 
     public LoggedUserEntity getLoggedUser(String email, String password) throws SQLException {
