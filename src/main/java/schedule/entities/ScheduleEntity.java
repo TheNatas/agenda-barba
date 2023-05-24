@@ -1,5 +1,7 @@
 package schedule.entities;
 
+import java.sql.Date;
+
 import lombok.*;
 
 @AllArgsConstructor
@@ -9,9 +11,10 @@ import lombok.*;
 @Getter
 @Setter
 public class ScheduleEntity {
-    private Integer id_service;
-    private Integer employee_id;
-    private Integer user_id;
-    private String admin_status;
-    private Integer barber_shop_id;
+    private Integer serviceId;
+    private Integer employeeId;
+    private Integer userId;
+    private Date date;
+    private String scheduleStatus;
+    private Integer barberShopId;
 }
