@@ -1,16 +1,15 @@
-package employee.models;
+package login.entities;
 
 import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString
 @Getter
 @Setter
-public class Employee {
-    private Integer idEmployee;
+@ToString
+public class LoggedUserEntity {
     private Integer userId;
+    private Integer employeeId;
     private Boolean adminStatus;
-    private Integer barberShopId;
 }
