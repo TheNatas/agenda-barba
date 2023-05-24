@@ -8,7 +8,9 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class NewUserDto {
+public class IncomingUserDto {
+    private Integer userId;
+    private Integer profileId;
     private String name;
     private String document;
     private String email;

@@ -5,12 +5,28 @@ import lombok.AllArgsConstructor;
 import user.models.User;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @AllArgsConstructor
 public class UserRepository {
     private Connection conn;
+
+    public User getUser(Integer id) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("select * from user u where u.id_user = ?");
+        ps.setInt(1, id);
+        ps.execute();
+        ResultSet rs = ps.getResultSet();
+        User user = null;
+        while (rs.next()) {
+            user = new User();
+            user.setIdUser(rs.getInt("id_user"));
+            user.setProfileId(rs.getInt("profile_id"));
+            user.setActive(rs.getBoolean("active"));
+            user.setEmail(rs.getString("email"));
+            user.setPassword(rs.getString("password"));
+        }
+
+        return user;
+    }
 
     public int createUser(User user) throws SQLException {
         PreparedStatement ps = conn.prepareStatement("insert into user (profile_id, active, email, password) values (?,?,?,?)");
@@ -18,6 +34,16 @@ public class UserRepository {
         ps.setBoolean(2, user.getActive());
         ps.setString(3, user.getEmail());
         ps.setString(4, user.getPassword());
+        return ps.execute() ? 1 : 0;
+    }
+
+    public int updateUser(User user) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("update user set profile_id = ?, active = ?, email = ?, password = ? where id_user = ?");
+        ps.setInt(1, user.getProfileId());
+        ps.setBoolean(2, user.getActive());
+        ps.setString(3, user.getEmail());
+        ps.setString(4, user.getPassword());
+        ps.setInt(5, user.getIdUser());
         return ps.execute() ? 1 : 0;
     }
 
