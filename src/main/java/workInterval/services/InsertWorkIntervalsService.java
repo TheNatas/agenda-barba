@@ -1,6 +1,6 @@
 package workInterval.services;
 
-import workInterval.entities.WorkIntervalEntity;
+import workInterval.dtos.NewWorkIntervalDto;
 import workInterval.repositories.WorkIntervalRepository;
 import lombok.AllArgsConstructor;
 
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class InsertWorkIntervalsService {
     private WorkIntervalRepository workIntervalRepository;
 
-    public int execute(WorkIntervalEntity workIntervalEntity) throws SQLException {
+    public int execute(NewWorkIntervalDto workIntervalEntity) throws SQLException {
         return this.workIntervalRepository.insertWorkInterval(workIntervalEntity);
     }
 }
