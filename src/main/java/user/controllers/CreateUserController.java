@@ -1,8 +1,5 @@
 package user.controllers;
 
-import login.entities.LoggedUserEntity;
-import login.factories.LoginFactory;
-import login.services.LoginService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import user.dtos.NewUserDto;

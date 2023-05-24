@@ -1,8 +1,5 @@
 package user.routes;
 
-import login.controllers.LoginController;
-import login.dtos.LoginDto;
-import login.entities.LoggedUserEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
