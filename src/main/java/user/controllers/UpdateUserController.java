@@ -1,27 +1,22 @@
-package login.controllers;
+package user.controllers;
 
-import login.dtos.LoginDto;
-import login.entities.LoggedUserEntity;
-import login.factories.LoginFactory;
-import login.services.LoginService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import user.dtos.IncomingUserDto;
+import user.factories.UserFactory;
+import user.services.UpdateUserService;
 import utils.Connector;
 
 import java.net.URI;
 import java.sql.Connection;
 
-public class LoginController {
-    public static ResponseEntity<LoggedUserEntity> execute(LoginDto loginDto) {
+public class UpdateUserController {
+    public static ResponseEntity<Integer> execute(IncomingUserDto incomingUserDto) {
         try {
             Connector connector = new Connector();
             Connection conn = connector.getConnection();
-            LoginService service = LoginFactory.builder().conn(conn).build().getLoginService();
-            LoggedUserEntity response = service.execute(loginDto);
-
-            if (response == null) {
-                throw new Exception("User not found");
-            }
+            UpdateUserService service = UserFactory.builder().conn(conn).build().getUpdateUserService();
+            int response = service.execute(incomingUserDto);
 
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                     .path("/{id}")
