@@ -1,5 +1,7 @@
 package login.controllers;
 
+import login.dtos.LoginDto;
+import login.entities.LoggedUserEntity;
 import login.factories.LoginFactory;
 import login.services.LoginService;
 import org.springframework.http.ResponseEntity;
@@ -8,15 +10,18 @@ import utils.Connector;
 
 import java.net.URI;
 import java.sql.Connection;
-import java.util.List;
 
 public class LoginController {
-    public static ResponseEntity<List<String>> execute(String name) {
+    public static ResponseEntity<LoggedUserEntity> execute(LoginDto loginDto) {
         try {
             Connector connector = new Connector();
             Connection conn = connector.getConnection();
             LoginService service = LoginFactory.builder().conn(conn).build().getLoginService();
-            List<String> response = service.execute(name);
+            LoggedUserEntity response = service.execute(loginDto);
+
+            if (response == null) {
+                throw new Exception("User not found");
+            }
 
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                     .path("/{id}")

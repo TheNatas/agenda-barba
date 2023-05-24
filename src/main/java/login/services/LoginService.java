@@ -1,5 +1,8 @@
 package login.services;
 
+import login.dtos.LoggedUserDto;
+import login.dtos.LoginDto;
+import login.entities.LoggedUserEntity;
 import login.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 
@@ -10,7 +13,7 @@ import java.util.List;
 public class LoginService {
     private UserRepository userRepository;
 
-    public List<String> execute(String name) throws SQLException {
-        return this.userRepository.getUsersNames();
+    public LoggedUserEntity execute(LoginDto loginDto) throws SQLException {
+        return this.userRepository.getLoggedUser(loginDto.getEmail(), loginDto.getPassword());
     }
 }
