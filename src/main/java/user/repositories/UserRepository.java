@@ -29,12 +29,21 @@ public class UserRepository {
     }
 
     public int createUser(User user) throws SQLException {
-        PreparedStatement ps = conn.prepareStatement("insert into user (profile_id, active, email, password) values (?,?,?,?)");
+        PreparedStatement ps = conn.prepareStatement("insert into user (profile_id, active, email, password) values (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
         ps.setInt(1, user.getProfileId());
         ps.setBoolean(2, user.getActive());
         ps.setString(3, user.getEmail());
         ps.setString(4, user.getPassword());
-        return ps.execute() ? 1 : 0;
+        ps.execute();
+
+        try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+            if (generatedKeys.next()) {
+                return generatedKeys.getInt(1);
+            }
+            else {
+                throw new SQLException("Creating user failed, no ID obtained.");
+            }
+        }
     }
 
     public int updateUser(User user) throws SQLException {
