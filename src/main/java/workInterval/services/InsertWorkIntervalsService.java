@@ -10,7 +10,12 @@ import java.sql.SQLException;
 public class InsertWorkIntervalsService {
     private WorkIntervalRepository workIntervalRepository;
 
-    public int execute(NewWorkIntervalDto workIntervalEntity) throws SQLException {
-        return this.workIntervalRepository.insertWorkInterval(workIntervalEntity);
+    public int execute(NewWorkIntervalDto workIntervalDto) throws SQLException {
+        if (workIntervalDto.getStart().compareTo(workIntervalDto.getEnd()) < 0) {
+            return this.workIntervalRepository.insertWorkInterval(workIntervalDto);
+        } 
+        else {
+            return -1;
+        }
     }
 }
