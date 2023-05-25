@@ -19,7 +19,6 @@ public class InsertWorkIntervalsController {
             int response = service.execute(workIntervalEntity);
 
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                    .path("/insert")
                     .buildAndExpand(response)
                     .toUri();
 

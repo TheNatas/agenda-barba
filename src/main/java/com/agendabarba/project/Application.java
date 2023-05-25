@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({"login.routes", "barberShop.routes", "user.routes"})
+@ComponentScan({"login.routes", "barberShop.routes", "user.routes", "workInterval.routes"})
 public class Application {
 
 	public static void main(String[] args) {

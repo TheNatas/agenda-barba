@@ -22,7 +22,7 @@ public class WorkIntervalRepository {
 
         try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
             if (generatedKeys.next()) {
-                return generatedKeys.getInt("id_work_interval");
+                return generatedKeys.getInt(1);
             }
             else {
                 throw new SQLException("Falha ao inserir periodo, nenhuma ID recuperada");
