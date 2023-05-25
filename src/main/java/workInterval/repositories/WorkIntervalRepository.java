@@ -4,6 +4,7 @@ import workInterval.dtos.NewWorkIntervalDto;
 import lombok.AllArgsConstructor;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 
 @AllArgsConstructor
 public class WorkIntervalRepository {
@@ -15,7 +16,8 @@ public class WorkIntervalRepository {
                 "values (?,?,?,?)";
         PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         ps.setInt(1, workIntervalEntity.getBarberShopid());
-        ps.setString(2, workIntervalEntity.getWeekDay());
+        Timestamp start = workIntervalEntity.getStart();
+        ps.setString(2, (new SimpleDateFormat("EEEE")).format(start.getTime()).toUpperCase());
         ps.setTimestamp(3, workIntervalEntity.getStart());
         ps.setTimestamp(4, workIntervalEntity.getEnd());
         ps.executeUpdate();
