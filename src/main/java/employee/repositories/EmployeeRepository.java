@@ -1,12 +1,14 @@
 package employee.repositories;
 
 import employee.models.Employee;
+import lombok.AllArgsConstructor;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@AllArgsConstructor
 public class EmployeeRepository {
     Connection conn;
 
@@ -24,5 +26,20 @@ public class EmployeeRepository {
         }
 
         return employee;
+    }
+
+    public int createEmployee(Employee employee) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("insert into employee (user_id, admin_status, barber_shop_id) values (?,?,?)");
+        ps.setInt(1, employee.getUserId());
+        ps.setBoolean(2, employee.getAdminStatus());
+        ps.setInt(3, employee.getBarberShopId());
+        return ps.execute() ? 1 : 0;
+    }
+
+    public int updateEmployee(Employee employee) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("update employee set admin_status = ? where id_employee = ?");
+        ps.setBoolean(1, employee.getAdminStatus());
+        ps.setInt(2, employee.getIdEmployee());
+        return ps.execute() ? 1 : 0;
     }
 }
