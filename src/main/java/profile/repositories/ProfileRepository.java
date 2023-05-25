@@ -42,7 +42,6 @@ public class ProfileRepository {
     }
 
     public int updateProfile(Profile profile) throws SQLException {
-        System.out.println("profile: " + profile);
         PreparedStatement ps = conn.prepareStatement("update profile set name = ?, document = ? where id_profile = ?", Statement.RETURN_GENERATED_KEYS);
         ps.setString(1, profile.getName());
         ps.setString(2, profile.getDocument());
