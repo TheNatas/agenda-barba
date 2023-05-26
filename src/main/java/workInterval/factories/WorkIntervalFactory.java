@@ -1,6 +1,7 @@
 package workInterval.factories;
 
 import workInterval.services.UpdateWorkIntervalsService;
+import workInterval.services.DeleteWorkIntervalsService;
 import workInterval.repositories.WorkIntervalRepository;
 import workInterval.services.InsertWorkIntervalsService;
 import lombok.Builder;
@@ -21,5 +22,9 @@ public class WorkIntervalFactory {
 
     public UpdateWorkIntervalsService updateWorkIntervalsService() {
         return new UpdateWorkIntervalsService(this.getWorkIntervalRepository());
+    }
+
+    public DeleteWorkIntervalsService deleteWorkIntervalsService() {
+        return new DeleteWorkIntervalsService(this.getWorkIntervalRepository());
     }
 }

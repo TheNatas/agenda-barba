@@ -13,7 +13,6 @@ import lombok.*;
 public class FullWorkIntervalDto {
     private int idWorkInterval;
     private int barberShopid;
-    private String weekDay;
     private Timestamp start;
     private Timestamp end;
 }

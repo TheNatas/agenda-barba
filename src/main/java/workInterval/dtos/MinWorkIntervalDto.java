@@ -1,7 +1,6 @@
 package workInterval.dtos;
 
 
-import java.sql.Timestamp;
 import lombok.*;
 
 @AllArgsConstructor
@@ -10,8 +9,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class NewWorkIntervalDto {
+public class MinWorkIntervalDto {
+    private int idWorkInterval;
     private int barberShopid;
-    private Timestamp start;
-    private Timestamp end;
 }

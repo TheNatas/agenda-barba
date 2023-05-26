@@ -1,5 +1,6 @@
 package workInterval.repositories;
 
+import workInterval.dtos.MinWorkIntervalDto;
 import workInterval.dtos.FullWorkIntervalDto;
 import workInterval.dtos.NewWorkIntervalDto;
 import lombok.AllArgsConstructor;
@@ -46,7 +47,13 @@ public class WorkIntervalRepository {
         ps.setInt(5, workIntervalDto.getBarberShopid());
         return ps.executeUpdate();
     };
-    
 
-
+    public int deleteWorkInterval(MinWorkIntervalDto workIntervalDto) throws SQLException{
+        String query = "delete from work_interval " +
+                "where id_work_interval = ? and barber_shop_id = ?";
+        PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        ps.setInt(1, workIntervalDto.getIdWorkInterval());
+        ps.setInt(2, workIntervalDto.getBarberShopid());
+        return ps.executeUpdate();
+    };
 }
