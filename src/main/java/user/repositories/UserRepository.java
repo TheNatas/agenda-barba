@@ -3,7 +3,6 @@ package user.repositories;
 import login.entities.LoggedUserEntity;
 import lombok.AllArgsConstructor;
 import user.models.User;
-
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -78,9 +77,9 @@ public class UserRepository {
     }
 
     public ArrayList<User> getAllUsers() throws SQLException{
-        String query = "select id_user,  from user";
+        String query = "select id_user, profile_id, active, email from user";
         PreparedStatement ps = conn.prepareStatement(query);
-        ResultSet rs = ps.getResultSet();
+        ResultSet rs = ps.executeQuery();
         ArrayList<User> list = new ArrayList<User>();
         while(rs.next()){
             User user = new User();

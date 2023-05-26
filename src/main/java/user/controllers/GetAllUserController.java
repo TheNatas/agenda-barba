@@ -33,5 +33,4 @@ public class GetAllUserController {
             return ResponseEntity.badRequest().build();
         }
     }
-    
 }

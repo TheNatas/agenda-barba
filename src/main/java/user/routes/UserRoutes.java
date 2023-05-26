@@ -4,6 +4,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import user.controllers.CreateUserController;
 import user.controllers.UpdateUserController;
+import user.controllers.GetAllUserController;
+import user.models.User;
+import java.util.ArrayList;
 import user.dtos.IncomingUserDto;
 
 @RestController
@@ -17,5 +20,10 @@ public class UserRoutes {
     @PutMapping("/user")
     public ResponseEntity<Integer> updateUser(@RequestBody IncomingUserDto incomingUserDto) {
         return UpdateUserController.execute(incomingUserDto);
+    }
+
+    @GetMapping("/user")
+    public  ResponseEntity<ArrayList<User>> getAllUser() {
+        return GetAllUserController.execute();
     }
 }
