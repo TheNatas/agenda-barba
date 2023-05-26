@@ -4,6 +4,7 @@ import lombok.Builder;
 import profile.repositories.ProfileRepository;
 import user.repositories.UserRepository;
 import user.services.CreateUserService;
+import user.services.GetAllUserService;
 import user.services.UpdateUserService;
 
 import java.sql.Connection;
@@ -18,6 +19,10 @@ public class UserFactory {
 
     public UpdateUserService getUpdateUserService() {
         return new UpdateUserService(this.getUserRepository(), this.getProfileRepository());
+    }
+
+    public GetAllUserService getAllUserService() {
+        return new GetAllUserService(this.getUserRepository(), this.getProfileRepository());
     }
 
     private UserRepository getUserRepository() {
