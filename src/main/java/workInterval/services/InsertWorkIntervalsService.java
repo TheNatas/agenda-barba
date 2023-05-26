@@ -15,7 +15,7 @@ public class InsertWorkIntervalsService {
             return this.workIntervalRepository.insertWorkInterval(workIntervalDto);
         } 
         else {
-            return -1;
+            return this.workIntervalRepository.badRequest().build()
         }
     }
 }
