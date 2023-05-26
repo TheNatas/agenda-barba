@@ -3,8 +3,8 @@ package user.repositories;
 import login.entities.LoggedUserEntity;
 import lombok.AllArgsConstructor;
 import user.models.User;
-
 import java.sql.*;
+import java.util.ArrayList;
 
 @AllArgsConstructor
 public class UserRepository {
@@ -74,5 +74,22 @@ public class UserRepository {
         }
 
         return loggedUserEntity;
+    }
+
+    public ArrayList<User> getAllUsers() throws SQLException{
+        String query = "select id_user, profile_id, active, email from user";
+        PreparedStatement ps = conn.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        ArrayList<User> list = new ArrayList<User>();
+        while(rs.next()){
+            User user = new User();
+            user.setIdUser(rs.getInt("id_user"));
+            user.setProfileId(rs.getInt("profile_id"));
+            user.setActive(rs.getBoolean("active"));
+            user.setEmail(rs.getString("email"));
+            list.add(user);
+        }
+
+        return list;
     }
 }
