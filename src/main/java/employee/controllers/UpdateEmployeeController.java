@@ -1,10 +1,8 @@
-package login.controllers;
+package employee.controllers;
 
-import login.dtos.LoginDto;
-import login.entities.LoggedUserEntity;
-import login.factories.LoginFactory;
-import login.services.LoginService;
-import org.springframework.http.HttpStatus;
+import employee.dtos.IncomingEmployeeDto;
+import employee.factories.EmployeeFactory;
+import employee.services.UpdateEmployeeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import utils.Connector;
@@ -12,17 +10,13 @@ import utils.Connector;
 import java.net.URI;
 import java.sql.Connection;
 
-public class LoginController {
-    public static ResponseEntity<LoggedUserEntity> execute(LoginDto loginDto) {
+public class UpdateEmployeeController {
+    public static ResponseEntity<Integer> execute(IncomingEmployeeDto incomingEmployeeDto) {
         try {
             Connector connector = new Connector();
             Connection conn = connector.getConnection();
-            LoginService service = LoginFactory.builder().conn(conn).build().getLoginService();
-            LoggedUserEntity response = service.execute(loginDto);
-
-            if (response == null) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-            }
+            UpdateEmployeeService service = EmployeeFactory.builder().conn(conn).build().getUpdateEmployeeService();
+            int response = service.execute(incomingEmployeeDto);
 
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                     .path("/{id}")

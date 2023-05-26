@@ -1,31 +1,25 @@
-package login.controllers;
+package service.controllers;
 
-import login.dtos.LoginDto;
-import login.entities.LoggedUserEntity;
-import login.factories.LoginFactory;
-import login.services.LoginService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import service.factories.ServiceFactory;
+import service.models.Service;
+import service.services.CreateServiceService;
+import service.services.UpdateServiceService;
 import utils.Connector;
 
 import java.net.URI;
 import java.sql.Connection;
 
-public class LoginController {
-    public static ResponseEntity<LoggedUserEntity> execute(LoginDto loginDto) {
+public class UpdateServiceController {
+    public static ResponseEntity<Integer> execute(Service incomingService) {
         try {
             Connector connector = new Connector();
             Connection conn = connector.getConnection();
-            LoginService service = LoginFactory.builder().conn(conn).build().getLoginService();
-            LoggedUserEntity response = service.execute(loginDto);
-
-            if (response == null) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-            }
+            UpdateServiceService service = ServiceFactory.builder().conn(conn).build().getUpdateServiceService();
+            int response = service.execute(incomingService);
 
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                    .path("/{id}")
                     .buildAndExpand(response)
                     .toUri();
 
