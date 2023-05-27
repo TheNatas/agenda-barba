@@ -5,7 +5,10 @@ import service.models.Service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 public class ServiceRepository {
@@ -29,5 +32,44 @@ public class ServiceRepository {
         ps.setInt(4, service.getDuration());
         ps.setInt(5, service.getIdService());
         return ps.execute() ? 1 : 0;
+    }
+
+    public Service getService(Integer id) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("select * from service s where s.id_services = ?");
+        ps.setInt(1, id);
+        ps.execute();
+        ResultSet rs = ps.getResultSet();
+        Service service = null;
+        while (rs.next()) {
+            service = new Service();
+            service.setIdService(rs.getInt(1));
+            service.setPrice(rs.getDouble(2));
+            service.setDescription(rs.getString(3));
+            service.setName(rs.getString(4));
+            service.setBarberShopId(rs.getInt(5));
+            service.setDuration(rs.getInt(6));
+        }
+
+        return service;
+    }
+
+    public List<Service> getServicesByBarberShop(Integer barberShopId) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("select * from service s where s.barber_shop_id = ?");
+        ps.setInt(1, barberShopId);
+        ps.execute();
+        ResultSet rs = ps.getResultSet();
+        List<Service> services = new ArrayList<>();
+        while (rs.next()) {
+            Service service = new Service();
+            service.setIdService(rs.getInt(1));
+            service.setPrice(rs.getDouble(2));
+            service.setDescription(rs.getString(3));
+            service.setName(rs.getString(4));
+            service.setBarberShopId(rs.getInt(5));
+            service.setDuration(rs.getInt(6));
+            services.add(service);
+        }
+
+        return services;
     }
 }
