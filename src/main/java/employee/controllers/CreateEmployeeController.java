@@ -19,7 +19,6 @@ public class CreateEmployeeController {
             int response = service.execute(incomingEmployeeDto);
 
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                    .path("/{id}")
                     .buildAndExpand(response)
                     .toUri();
 
