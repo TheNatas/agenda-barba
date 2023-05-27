@@ -19,7 +19,6 @@ public class CreateUserController {
             int response = service.execute(incomingUserDto);
 
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                    .path("/{id}")
                     .buildAndExpand(response)
                     .toUri();
 

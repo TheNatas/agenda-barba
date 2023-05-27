@@ -25,7 +25,6 @@ public class LoginController {
             }
 
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                    .path("/{id}")
                     .buildAndExpand(response)
                     .toUri();
 

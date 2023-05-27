@@ -20,7 +20,6 @@ public class GetBarberShopInfoController {
             BarberShopEntity response = service.execute(barberShopId);
 
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                    .path("/{id}")
                     .buildAndExpand(response)
                     .toUri();
 
