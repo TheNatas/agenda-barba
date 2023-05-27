@@ -1,10 +1,7 @@
 package employee.factories;
 
 import employee.repositories.EmployeeRepository;
-import employee.services.CreateEmployeeService;
-import employee.services.GetEmployeeService;
-import employee.services.GetEmployeesFromBarberShopService;
-import employee.services.UpdateEmployeeService;
+import employee.services.*;
 import lombok.Builder;
 import user.factories.UserFactory;
 
@@ -20,6 +17,10 @@ public class EmployeeFactory {
 
     public UpdateEmployeeService getUpdateEmployeeService() {
         return new UpdateEmployeeService(this.getEmployeeRepository(), UserFactory.builder().conn(conn).build().getUpdateUserService());
+    }
+
+    public DeleteEmployeeService getDeleteEmployeeService() {
+        return new DeleteEmployeeService(this.getEmployeeRepository());
     }
 
     public GetEmployeesFromBarberShopService getEmployeesFromBarberShopService() {

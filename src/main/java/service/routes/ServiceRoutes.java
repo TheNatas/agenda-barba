@@ -2,10 +2,7 @@ package service.routes;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.controllers.CreateServiceController;
-import service.controllers.GetServiceController;
-import service.controllers.GetServicesByBarberShopController;
-import service.controllers.UpdateServiceController;
+import service.controllers.*;
 import service.models.Service;
 
 import java.util.List;
@@ -21,6 +18,11 @@ public class ServiceRoutes {
     @PutMapping("/service")
     public ResponseEntity<Integer> updateService(@RequestBody Service service) {
         return UpdateServiceController.execute(service);
+    }
+
+    @DeleteMapping("/service/{id}")
+    public ResponseEntity<Integer> deleteService(@PathVariable Integer id) {
+        return DeleteServiceController.execute(id);
     }
 
     @GetMapping("/service/{id}")

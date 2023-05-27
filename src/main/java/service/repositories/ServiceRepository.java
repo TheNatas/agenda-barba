@@ -72,4 +72,10 @@ public class ServiceRepository {
 
         return services;
     }
+
+    public int delete(Integer id) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("delete from service where id_services = ?");
+        ps.setInt(1, id);
+        return ps.executeUpdate();
+    }
 }
