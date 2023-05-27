@@ -1,9 +1,6 @@
 package employee.routes;
 
-import employee.controllers.CreateEmployeeController;
-import employee.controllers.GetEmployeeController;
-import employee.controllers.GetEmployeesFromBarberShopController;
-import employee.controllers.UpdateEmployeeController;
+import employee.controllers.*;
 import employee.dtos.EmployeeEntity;
 import employee.dtos.IncomingEmployeeDto;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +29,10 @@ public class EmployeeRoutes {
     @GetMapping("/employee/{id}")
     public ResponseEntity<EmployeeEntity> getEmployee(@PathVariable Integer id) {
         return GetEmployeeController.execute(id);
+    }
+
+    @DeleteMapping("/employee/{id}")
+    public ResponseEntity<Integer> deleteEmployee(@PathVariable Integer id) {
+        return DeleteEmployeeController.execute(id);
     }
 }

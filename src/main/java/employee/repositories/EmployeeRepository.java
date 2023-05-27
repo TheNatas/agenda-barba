@@ -74,4 +74,10 @@ public class EmployeeRepository {
         ps.setInt(2, employee.getIdEmployee());
         return ps.execute() ? 1 : 0;
     }
+
+    public int delete(Integer id) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("delete from employee where id_employee = ?");
+        ps.setInt(1, id);
+        return ps.executeUpdate();
+    }
 }
