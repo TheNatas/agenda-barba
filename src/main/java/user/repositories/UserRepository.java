@@ -57,8 +57,9 @@ public class UserRepository {
     }
 
     public LoggedUserEntity getLoggedUser(String email, String password) throws SQLException {
-        String query = "select u.id_user, e.id_employee, e.admin_status from user u " +
+        String query = "select u.id_user, e.id_employee, e.admin_status, u.email, u.password, p.name, p.document from user u " +
                 "left join employee e on (e.user_id = u.id_user) " +
+                "inner join profile p on (p.id_profile = u.profile_id) " +
                 " where u.email = ? and u.password = ?";
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setString(1, email);
@@ -71,6 +72,10 @@ public class UserRepository {
             loggedUserEntity.setUserId(rs.getInt(1));
             loggedUserEntity.setEmployeeId(rs.getInt(2) != 0 ? rs.getInt(2) : null);
             loggedUserEntity.setAdminStatus(rs.getBoolean(3));
+            loggedUserEntity.setEmail(rs.getString(4));
+            loggedUserEntity.setPassword(rs.getString(5));
+            loggedUserEntity.setName(rs.getString(6));
+            loggedUserEntity.setDocument(rs.getString(7));
         }
 
         return loggedUserEntity;
