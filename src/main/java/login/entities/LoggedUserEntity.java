@@ -12,4 +12,8 @@ public class LoggedUserEntity {
     private Integer userId;
     private Integer employeeId;
     private Boolean adminStatus;
+    private String email;
+    private String password;
+    private String name;
+    private String document;
 }
