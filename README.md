@@ -5,6 +5,8 @@
 ### Running:
 - <code>./mvnw spring-boot:run</code> in the root folder
 
+If mvnw is not found in your local project, try running <code>mvn -N io.takari:maven:wrapper</code> before to create it.
+
 ### Geração de pacote para deploy
 - mvn clean package na pasta raiz do projeto
 
