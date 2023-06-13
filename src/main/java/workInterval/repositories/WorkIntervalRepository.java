@@ -62,7 +62,7 @@ public class WorkIntervalRepository {
     };
 
     public List<WorkInterval> getWorkIntervalsByBarberShop(Integer barberShopId) throws SQLException {
-        PreparedStatement ps = conn.prepareStatement("select * from work_interval wi where wi.barber_shop_id = ?");
+        PreparedStatement ps = conn.prepareStatement("select id_work_interval, barber_shop_id, week_day, start, end from work_interval wi where wi.barber_shop_id = ?");
         ps.setInt(1, barberShopId);
         ps.execute();
         ResultSet rs = ps.getResultSet();

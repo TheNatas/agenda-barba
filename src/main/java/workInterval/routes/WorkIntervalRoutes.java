@@ -41,7 +41,6 @@ public class WorkIntervalRoutes {
 
     @GetMapping(
             path = "/workIntervals",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<List<WorkIntervalDto>> getWorkIntervals(@RequestParam(value = "barberShopId") Integer barberShopId) {

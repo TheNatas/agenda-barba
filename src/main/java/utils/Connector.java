@@ -11,11 +11,11 @@ import java.util.Properties;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Connector {
-    private String userName = "sql10619752";
-    private String password = "ufd4Iia8iq";
+    private String userName = "apiuser1";
+    private String password = "senha@API2023";
     private String dbms = "mysql";
-    private String serverName = "sql10.freemysqlhosting.net";
-    private String dbName = "sql10619752";
+    private String serverName = "agendabarba-db-1.cfdb0dd5xmmb.us-east-2.rds.amazonaws.com";
+    private String dbName = "agenda_barba_db";
     private Integer portNumber = 3306;
 
     public Connection getConnection() throws SQLException {
