@@ -11,8 +11,8 @@ import java.util.Properties;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Connector {
-    private String userName = "aapiuser1";
-    private String password = "antigoibarber";
+    private String userName = "apiuser1";
+    private String password = "senha@API2023";
     private String dbms = "mysql";
     private String serverName = "agendabarba-db-1.cfdb0dd5xmmb.us-east-2.rds.amazonaws.com";
     private String dbName = "agenda_barba_db";
