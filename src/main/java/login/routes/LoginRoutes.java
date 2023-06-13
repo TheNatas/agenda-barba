@@ -13,7 +13,7 @@ import java.util.List;
 public class LoginRoutes {
 
     @PostMapping("/login")
-    public ResponseEntity<LoggedUserEntity> login(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
         return LoginController.execute(loginDto);
     }
 
