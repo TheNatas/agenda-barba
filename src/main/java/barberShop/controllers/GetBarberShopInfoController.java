@@ -1,5 +1,6 @@
 package barberShop.controllers;
 
+import barberShop.dtos.BarberShopDto;
 import barberShop.entities.BarberShopEntity;
 import barberShop.factories.BarberShopFactory;
 import barberShop.services.GetBarberShopInfoService;
@@ -12,12 +13,12 @@ import java.sql.Connection;
 import java.util.List;
 
 public class GetBarberShopInfoController {
-    public static ResponseEntity<BarberShopEntity> execute(Integer barberShopId) {
+    public static ResponseEntity<BarberShopDto> execute(Integer barberShopId) {
         try {
             Connector connector = new Connector();
             Connection conn = connector.getConnection();
             GetBarberShopInfoService service = BarberShopFactory.builder().conn(conn).build().getBarberShopInfoService();
-            BarberShopEntity response = service.execute(barberShopId);
+            BarberShopDto response = service.execute(barberShopId);
 
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                     .buildAndExpand(response)

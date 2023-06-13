@@ -1,7 +1,7 @@
 package workInterval.models;
 
 
-import java.sql.Timestamp;
+import java.sql.Time;
 
 import lombok.*;
 
@@ -13,8 +13,8 @@ import lombok.*;
 @Setter
 public class WorkInterval{
     private int idWorkInterval;
-    private int barberShopid;
+    private int barberShopId;
     private String weekDay;
-    private Timestamp start;
-    private Timestamp end;
+    private Time start;
+    private Time end;
 }

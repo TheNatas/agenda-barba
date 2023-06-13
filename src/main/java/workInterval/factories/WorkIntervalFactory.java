@@ -1,5 +1,6 @@
 package workInterval.factories;
 
+import workInterval.services.GetWorkIntervalsByBarberShopService;
 import workInterval.services.UpdateWorkIntervalsService;
 import workInterval.services.DeleteWorkIntervalsService;
 import workInterval.repositories.WorkIntervalRepository;
@@ -26,5 +27,9 @@ public class WorkIntervalFactory {
 
     public DeleteWorkIntervalsService deleteWorkIntervalsService() {
         return new DeleteWorkIntervalsService(this.getWorkIntervalRepository());
+    }
+
+    public GetWorkIntervalsByBarberShopService getWorkIntervalsByBarberShopService() {
+        return new GetWorkIntervalsByBarberShopService(this.getWorkIntervalRepository());
     }
 }
