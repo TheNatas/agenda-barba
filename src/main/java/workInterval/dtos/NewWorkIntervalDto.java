@@ -11,7 +11,7 @@ import lombok.*;
 @Setter
 @ToString
 public class NewWorkIntervalDto {
-    private int barberShopid;
+    private int barberShopId;
     private Timestamp start;
     private Timestamp end;
 }
