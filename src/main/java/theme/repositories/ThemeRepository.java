@@ -1,14 +1,9 @@
 package theme.repositories;
 
 import lombok.AllArgsConstructor;
-import service.models.Service;
 import theme.models.Theme;
-import workInterval.dtos.FullWorkIntervalDto;
-import workInterval.dtos.MinWorkIntervalDto;
-import workInterval.models.WorkInterval;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +13,7 @@ public class ThemeRepository {
 
     public int createTheme(Theme theme) throws SQLException {
         String query = "insert into theme (" +
-                "background_color, primary_color, secondary_color, highlight_color, text_color, text_contrast_color, image_url, barber_shop_id" +
+                "background_color, primary_color, secondary_color, highlight_color, text_color, text_contrast, image_url, barber_shop_id" +
                 ") values (?,?,?,?,?,?,?,?)";
         PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         ps.setString(1, theme.getBackgroundColor());
@@ -26,7 +21,7 @@ public class ThemeRepository {
         ps.setString(3, theme.getSecondaryColor());
         ps.setString(4, theme.getHighlightColor());
         ps.setString(5, theme.getTextColor());
-        ps.setString(6, theme.getTextContrastColor());
+        ps.setString(6, theme.getTextContrast());
         ps.setString(7, theme.getImageUrl());
         ps.setInt(8, theme.getBarberShopId());
         ps.execute();
@@ -43,23 +38,23 @@ public class ThemeRepository {
 
     public int updateTheme(Theme theme) throws SQLException{
         String query = "update theme " +
-                "set background_color = ?, primary_color = ?, secondary_color = ?, highlight_color = ?, text_color = ?, text_contrast_color = ?, image_url = ? " +
-                "where id = ?";
+                "set background_color = ?, primary_color = ?, secondary_color = ?, highlight_color = ?, text_color = ?, text_contrast = ?, image_url = ? " +
+                "where id_theme = ?";
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setString(1, theme.getBackgroundColor());
         ps.setString(2, theme.getPrimaryColor());
         ps.setString(3, theme.getSecondaryColor());
         ps.setString(4, theme.getHighlightColor());
         ps.setString(5, theme.getTextColor());
-        ps.setString(6, theme.getTextContrastColor());
+        ps.setString(6, theme.getTextContrast());
         ps.setString(7, theme.getImageUrl());
-        ps.setInt(8, theme.getId());
+        ps.setInt(8, theme.getIdTheme());
         return ps.executeUpdate();
     };
 
     public int deleteTheme(Integer id) throws SQLException{
         String query = "delete from theme " +
-                "where id = ?";
+                "where id_theme = ?";
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setInt(1, id);
         return ps.executeUpdate();
@@ -67,9 +62,9 @@ public class ThemeRepository {
 
     public Theme getTheme(Integer id) throws SQLException {
         String query = "select " +
-                "id, background_color, primary_color, secondary_color, highlight_color, text_color, text_contrast_color, image_url, barber_shop_id " +
+                "id_theme, background_color, primary_color, secondary_color, highlight_color, text_color, text_contrast, image_url, barber_shop_id " +
                 "from theme t " +
-                "where t.id = ?";
+                "where t.id_theme = ?";
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setInt(1, id);
         ps.execute();
@@ -77,13 +72,13 @@ public class ThemeRepository {
         Theme theme = null;
         while (rs.next()) {
             theme = Theme.builder()
-                    .id(rs.getInt(1))
+                    .idTheme(rs.getInt(1))
                     .backgroundColor(rs.getString(2))
                     .primaryColor(rs.getString(3))
                     .secondaryColor(rs.getString(4))
                     .highlightColor(rs.getString(5))
                     .textColor(rs.getString(6))
-                    .textContrastColor(rs.getString(7))
+                    .textContrast(rs.getString(7))
                     .imageUrl(rs.getString(8))
                     .barberShopId(rs.getInt(9))
                     .build();
@@ -93,7 +88,7 @@ public class ThemeRepository {
 
     public List<Theme> getThemesByBarberShop(Integer barberShopId) throws SQLException {
         String query = "select " +
-                "id, background_color, primary_color, secondary_color, highlight_color, text_color, text_contrast_color, image_url, barber_shop_id " +
+                "id_theme, background_color, primary_color, secondary_color, highlight_color, text_color, text_contrast, image_url, barber_shop_id " +
                 "from theme t " +
                 "where t.barber_shop_id = ?";
         PreparedStatement ps = conn.prepareStatement(query);
@@ -104,13 +99,13 @@ public class ThemeRepository {
         while (rs.next()) {
             themes.add(
                     Theme.builder()
-                            .id(rs.getInt(1))
+                            .idTheme(rs.getInt(1))
                             .backgroundColor(rs.getString(2))
                             .primaryColor(rs.getString(3))
                             .secondaryColor(rs.getString(4))
                             .highlightColor(rs.getString(5))
                             .textColor(rs.getString(6))
-                            .textContrastColor(rs.getString(7))
+                            .textContrast(rs.getString(7))
                             .imageUrl(rs.getString(8))
                             .barberShopId(rs.getInt(9))
                             .build()

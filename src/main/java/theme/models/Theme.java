@@ -9,13 +9,13 @@ import lombok.*;
 @Builder
 @ToString
 public class Theme {
-    private Integer id;
+    private Integer idTheme;
     private String backgroundColor;
     private String primaryColor;
     private String secondaryColor;
     private String highlightColor;
     private String textColor;
-    private String textContrastColor;
+    private String textContrast;
     private String imageUrl;
     private Integer barberShopId;
 }
