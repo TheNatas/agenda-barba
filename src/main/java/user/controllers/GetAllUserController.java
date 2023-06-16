@@ -16,9 +16,9 @@ import java.util.ArrayList;
 public class GetAllUserController {
 
     public static ResponseEntity<ArrayList<User>> execute() {
-        try {
-            Connector connector = new Connector();
-            Connection conn = connector.getConnection();
+
+        Connector connector = new Connector();
+        try(Connection conn = connector.getConnection();){
             GetAllUserService service = UserFactory.builder().conn(conn).build().getAllUserService();
             ArrayList<User> response = service.execute();
 

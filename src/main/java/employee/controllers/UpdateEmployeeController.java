@@ -12,9 +12,8 @@ import java.sql.Connection;
 
 public class UpdateEmployeeController {
     public static ResponseEntity<Integer> execute(IncomingEmployeeDto incomingEmployeeDto) {
-        try {
-            Connector connector = new Connector();
-            Connection conn = connector.getConnection();
+        Connector connector = new Connector();
+        try(Connection conn = connector.getConnection();){
             UpdateEmployeeService service = EmployeeFactory.builder().conn(conn).build().getUpdateEmployeeService();
             int response = service.execute(incomingEmployeeDto);
 

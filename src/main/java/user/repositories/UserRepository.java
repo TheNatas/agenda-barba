@@ -24,7 +24,6 @@ public class UserRepository {
             user.setEmail(rs.getString("email"));
             user.setPassword(rs.getString("password"));
         }
-
         return user;
     }
 
@@ -44,6 +43,7 @@ public class UserRepository {
                 throw new SQLException("Creating user failed, no ID obtained.");
             }
         }
+
     }
 
     public int updateUser(User user) throws SQLException {

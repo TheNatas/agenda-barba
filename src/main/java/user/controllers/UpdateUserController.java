@@ -12,9 +12,9 @@ import java.sql.Connection;
 
 public class UpdateUserController {
     public static ResponseEntity<Integer> execute(IncomingUserDto incomingUserDto) {
-        try {
-            Connector connector = new Connector();
-            Connection conn = connector.getConnection();
+        
+        Connector connector = new Connector();
+        try(Connection conn = connector.getConnection();){
             UpdateUserService service = UserFactory.builder().conn(conn).build().getUpdateUserService();
             int response = service.execute(incomingUserDto);
 

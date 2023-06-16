@@ -12,9 +12,8 @@ import java.sql.Connection;
 
 public class DeleteWorkIntervalsController {
     public static ResponseEntity<Integer> execute(MinWorkIntervalDto workIntervalDto) {
-        try {
-            Connector connector = new Connector();
-            Connection conn = connector.getConnection();
+        Connector connector = new Connector();
+        try(Connection conn = connector.getConnection();){
             DeleteWorkIntervalsService service = WorkIntervalFactory.builder().conn(conn).build().deleteWorkIntervalsService();
             int response = service.execute(workIntervalDto);
 

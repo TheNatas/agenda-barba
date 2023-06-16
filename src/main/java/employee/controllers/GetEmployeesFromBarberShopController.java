@@ -16,9 +16,8 @@ import java.util.List;
 
 public class GetEmployeesFromBarberShopController {
     public static ResponseEntity<List<EmployeeEntity>> execute(Integer barberShopId) {
-        try {
-            Connector connector = new Connector();
-            Connection conn = connector.getConnection();
+        Connector connector = new Connector();
+        try(Connection conn = connector.getConnection();){
             GetEmployeesFromBarberShopService service = EmployeeFactory.builder().conn(conn).build().getEmployeesFromBarberShopService();
             List<EmployeeEntity> response = service.execute(barberShopId);
 

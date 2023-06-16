@@ -17,9 +17,8 @@ import java.util.List;
 
 public class GetEmployeeController {
     public static ResponseEntity<EmployeeEntity> execute(Integer id) {
-        try {
-            Connector connector = new Connector();
-            Connection conn = connector.getConnection();
+        Connector connector = new Connector();
+        try(Connection conn = connector.getConnection();){
             GetEmployeeService service = EmployeeFactory.builder().conn(conn).build().getEmployeeService();
             EmployeeEntity response = service.execute(id);
 

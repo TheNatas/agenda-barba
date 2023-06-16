@@ -12,9 +12,8 @@ import java.sql.Connection;
 
 public class UpdateWorkIntervalsController {
     public static ResponseEntity<Integer> execute(FullWorkIntervalDto workIntervalDto) {
-        try {
-            Connector connector = new Connector();
-            Connection conn = connector.getConnection();
+        Connector connector = new Connector();
+        try(Connection conn = connector.getConnection();){
             UpdateWorkIntervalsService service = WorkIntervalFactory.builder().conn(conn).build().updateWorkIntervalsService();
             int response = service.execute(workIntervalDto);
 
