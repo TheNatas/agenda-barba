@@ -15,9 +15,8 @@ import java.util.List;
 
 public class GetWorkIntervalsByBarberShopController {
     public static ResponseEntity<List<WorkIntervalDto>> execute(Integer barberShopId) {
-        try {
-            Connector connector = new Connector();
-            Connection conn = connector.getConnection();
+        Connector connector = new Connector();
+        try(Connection conn = connector.getConnection();){
             GetWorkIntervalsByBarberShopService service = WorkIntervalFactory.builder().conn(conn).build().getWorkIntervalsByBarberShopService();
             List<WorkIntervalDto> response = service.execute(barberShopId);
 

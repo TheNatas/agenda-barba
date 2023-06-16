@@ -13,9 +13,8 @@ import java.util.List;
 
 public class GetThemesFromBarberShopController {
     public static ResponseEntity<List<Theme>> execute(Integer barberShopId) {
-        try {
-            Connector connector = new Connector();
-            Connection conn = connector.getConnection();
+        Connector connector = new Connector();
+        try(Connection conn = connector.getConnection();){
             GetThemesFromBarberShopService service = ThemeFactory.builder().conn(conn).build().getThemesFromBarberShopService();
             List<Theme> response = service.execute(barberShopId);
 

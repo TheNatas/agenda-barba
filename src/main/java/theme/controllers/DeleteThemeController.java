@@ -11,9 +11,8 @@ import java.sql.Connection;
 
 public class DeleteThemeController {
     public static ResponseEntity<Integer> execute(Integer id) {
-        try {
-            Connector connector = new Connector();
-            Connection conn = connector.getConnection();
+        Connector connector = new Connector();
+        try(Connection conn = connector.getConnection();){
             DeleteThemeService service = ThemeFactory.builder().conn(conn).build().getDeleteThemeService();
             int response = service.execute(id);
 

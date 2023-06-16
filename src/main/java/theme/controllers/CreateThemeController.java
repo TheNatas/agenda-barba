@@ -12,9 +12,8 @@ import java.sql.Connection;
 
 public class CreateThemeController {
     public static ResponseEntity<Integer> execute(Theme incomingTheme) {
-        try {
-            Connector connector = new Connector();
-            Connection conn = connector.getConnection();
+        Connector connector = new Connector();
+        try(Connection conn = connector.getConnection();){
             CreateThemeService service = ThemeFactory.builder().conn(conn).build().getCreateThemeService();
             int response = service.execute(incomingTheme);
 
