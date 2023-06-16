@@ -12,9 +12,8 @@ import java.sql.Connection;
 
 public class GetServiceController {
     public static ResponseEntity<Service> execute(Integer id) {
-        try {
-            Connector connector = new Connector();
-            Connection conn = connector.getConnection();
+        Connector connector = new Connector();
+        try(Connection conn = connector.getConnection();){
             GetServiceService service = ServiceFactory.builder().conn(conn).build().getServiceService();
             Service response = service.execute(id);
 

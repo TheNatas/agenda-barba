@@ -13,9 +13,8 @@ import java.sql.Connection;
 
 public class UpdateServiceController {
     public static ResponseEntity<Integer> execute(Service incomingService) {
-        try {
-            Connector connector = new Connector();
-            Connection conn = connector.getConnection();
+        Connector connector = new Connector();
+        try(Connection conn = connector.getConnection();){
             UpdateServiceService service = ServiceFactory.builder().conn(conn).build().getUpdateServiceService();
             int response = service.execute(incomingService);
 

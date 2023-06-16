@@ -15,21 +15,21 @@ import java.sql.Connection;
 
 public class LoginController {
     public static ResponseEntity<?> execute(LoginDto loginDto) {
-        try {
-            // Verifica se o campo "email" é nulo ou vazio
-            if (loginDto.getEmail() == null || loginDto.getEmail().isEmpty()) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ErrorResponse("O campo 'email' é obrigatório!"));
-            }
+        //try {
+        // Verifica se o campo "email" é nulo ou vazio
+        if (loginDto.getEmail() == null || loginDto.getEmail().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ErrorResponse("O campo 'email' é obrigatório!"));
+        }
 
-            // Verifica se o campo "password" é nulo ou vazio
-            if (loginDto.getPassword() == null || loginDto.getPassword().isEmpty()) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ErrorResponse("O campo 'password' é obrigatório!"));
-            }
+        // Verifica se o campo "password" é nulo ou vazio
+        if (loginDto.getPassword() == null || loginDto.getPassword().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ErrorResponse("O campo 'password' é obrigatório!"));
+        }
 
-            Connector connector = new Connector();
-            Connection conn = connector.getConnection();
+        Connector connector = new Connector();
+        try(Connection conn = connector.getConnection();){
             LoginService service = LoginFactory.builder().conn(conn).build().getLoginService();
             LoggedUserEntity response = service.execute(loginDto);
 

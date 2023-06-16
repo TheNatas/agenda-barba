@@ -15,9 +15,8 @@ import java.sql.Connection;
 
 public class DeleteServiceController {
     public static ResponseEntity<Integer> execute(Integer id) {
-        try {
-            Connector connector = new Connector();
-            Connection conn = connector.getConnection();
+        Connector connector = new Connector();
+        try(Connection conn = connector.getConnection();){
             DeleteServiceService service = ServiceFactory.builder().conn(conn).build().getDeleteServiceService();
             int response = service.execute(id);
 
