@@ -16,19 +16,18 @@ import java.util.ArrayList;
 public class GetAllUserController {
 
     public static ResponseEntity<ArrayList<User>> execute() {
-        //try {
-            Connector connector = new Connector();
-            try(Connection conn = connector.getConnection();){
-                GetAllUserService service = UserFactory.builder().conn(conn).build().getAllUserService();
-                ArrayList<User> response = service.execute();
 
-                URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                        .buildAndExpand(response)
-                        .toUri();
+        Connector connector = new Connector();
+        try(Connection conn = connector.getConnection();){
+            GetAllUserService service = UserFactory.builder().conn(conn).build().getAllUserService();
+            ArrayList<User> response = service.execute();
 
-                return ResponseEntity.created(uri)
-                        .body(response);
-          //  }
+            URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                    .buildAndExpand(response)
+                    .toUri();
+
+            return ResponseEntity.created(uri)
+                    .body(response);
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             return ResponseEntity.badRequest().build();

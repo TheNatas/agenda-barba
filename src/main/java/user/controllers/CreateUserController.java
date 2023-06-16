@@ -12,9 +12,8 @@ import java.sql.Connection;
 
 public class CreateUserController {
     public static ResponseEntity<Integer> execute(IncomingUserDto incomingUserDto) {
-        try {
-            Connector connector = new Connector();
-            Connection conn = connector.getConnection();
+        Connector connector = new Connector();
+        try (Connection conn = connector.getConnection();){
             CreateUserService service = UserFactory.builder().conn(conn).build().getCreateUserService();
             int response = service.execute(incomingUserDto);
 
