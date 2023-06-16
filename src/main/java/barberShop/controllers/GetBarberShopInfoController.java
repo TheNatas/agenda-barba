@@ -14,9 +14,8 @@ import java.util.List;
 
 public class GetBarberShopInfoController {
     public static ResponseEntity<BarberShopDto> execute(Integer barberShopId) {
-        try {
-            Connector connector = new Connector();
-            Connection conn = connector.getConnection();
+        Connector connector = new Connector();
+        try(Connection conn = connector.getConnection();){
             GetBarberShopInfoService service = BarberShopFactory.builder().conn(conn).build().getBarberShopInfoService();
             BarberShopDto response = service.execute(barberShopId);
 
